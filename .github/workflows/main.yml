@@ -39,6 +39,7 @@ jobs:
         DB_PORT: 5432
         SECRET_KEY: ${{ secrets.SECRET_KEY }}
       run: |
+        echo "SECRET_KEY=${{ secrets.SECRET_KEY }}"  # Проверяем, что секретный ключ доступен
         python -m flake8 backend/
         cd backend/
         python manage.py test
