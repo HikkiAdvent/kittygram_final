@@ -129,12 +129,6 @@ jobs:
     steps:
     - name: Checkout repo
       uses: actions/checkout@v3
-    - name: Echo secrets
-      run: |
-        echo "HOST is set"
-        echo "USER is set"
-        echo "SSH_KEY is set"
-        echo "SSH_PASSPHRASE is set"
     - name: Copy docker-compose.production.yml via ssh
       uses: appleboy/scp-action@master
       with:
