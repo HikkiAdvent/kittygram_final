@@ -1,51 +1,48 @@
-### Как запустить проект:
+## Как запустить проект:
+
 
 Клонировать репозиторий и перейти в него в командной строке:
 
+```bash
+git clone https://github.com/<ваш_аккаунт>/kittygram_final
 ```
-git clone https://github.com/yandex-praktikum/kittygram_backend.git
-```
-
-```
+```bash
 cd kittygram_backend
 ```
-
-Cоздать и активировать виртуальное окружение:
-
-```
-python3 -m venv env
-```
-
-* Если у вас Linux/macOS
-
-    ```
-    source env/bin/activate
-    ```
-
-* Если у вас windows
-
-    ```
-    source env/scripts/activate
-    ```
+Создать свой .env файл и заполнить его нужными параметрами, например:
 
 ```
-python3 -m pip install --upgrade pip
+DB_ENGINE=django.db.backends.postgresql
+POSTGRES_DB=your_db
+POSTGRES_USER=your_user
+POSTGRES_PASSWORD=your_password
+DB_HOST=localhost
+DB_PORT=5432
+ALLOWED_HOSTS=example.com,www.example.com
 ```
+Построить образ:
 
-Установить зависимости из файла requirements.txt:
-
+```bash
+docker build -t kittygram_backend .
 ```
-pip install -r requirements.txt
-```
+Запустить контейнер:
 
-Выполнить миграции:
-
+```bash
+docker run -d -p 8000:8000 --env-file .env kittygram_backend
 ```
-python3 manage.py migrate
-```
+Проект будет доступен по адресу `http://localhost:8000`.
 
-Запустить проект:
 
+Для выполнения миграций или других команд в контейнере, используйте команду:
+
+```bash
+docker exec -it <container_name> python3 manage.py migrate
 ```
-python3 manage.py runserver
+Где `<container_name>` — имя вашего контейнера, которое можно узнать через команду docker ps.
+
+
+Для остановки контейнера используйте команду:
+
+```bash
+docker stop <container_name>
 ```
