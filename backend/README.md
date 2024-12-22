@@ -46,3 +46,18 @@ docker exec -it <container_name> python3 manage.py migrate
 ```bash
 docker stop <container_name>
 ```
+
+### Настройка базы данных:
+
+- В проекте используется гибкая настройка базы данных:
+
+  - **PostgreSQL**:
+    - Если в `.env` файле указана переменная `DB_ENGINE=django.db.backends.postgresql`, проект подключится к базе данных **PostgreSQL** с параметрами:
+      - `POSTGRES_DB`: имя базы данных.
+      - `POSTGRES_USER`: имя пользователя для подключения.
+      - `POSTGRES_PASSWORD`: пароль для пользователя.
+      - `DB_HOST`: хост для подключения (например, `localhost`).
+      - `DB_PORT`: порт подключения (например, `5432`).
+
+  - **SQLite**:
+    - Если переменная `DB_ENGINE` не указана или оставлена пустой, то проект будет использовать **SQLite** по умолчанию, с файлом базы данных `db.sqlite3`.
